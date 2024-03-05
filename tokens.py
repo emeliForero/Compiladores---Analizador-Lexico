@@ -25,7 +25,6 @@ class Lexer:
     t_CADENA = r'\"[^\"]*\"'
     t_SIMBOLO_ESPECIAL = r'[(),:;{}[\]]'
     t_COMENTARIO = r'\#.*'
-       
 
     # Ignorar espacios
     t_ignore = ' '
@@ -46,21 +45,13 @@ class Lexer:
     def __init__(self, **kwargs):
         self.build(**kwargs)
 
-# Ejemplo
-codigo = """
-#Comentario es esto
-def factorial(n):
-    if n == 0 or n == 1:
-        return 1
-    else:
-        return n * factorial(n-1)
-
-resultado = factorial(5)
-print("El factorial de 5 es:", resultado)
-"""
+    def analizar_archivo(self, nombre_archivo):
+        with open(nombre_archivo, 'r') as archivo:
+            codigo = archivo.read()
+            self.lexer.input(codigo)    
 
 lexer = Lexer()
-lexer.lexer.input(codigo)
+lexer.analizar_archivo("codigo.txt")
 
 #Tokens encontrados
 for token in lexer.lexer:
