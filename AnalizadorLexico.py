@@ -1,6 +1,6 @@
 import ply.lex as lex
 
-class Token:
+class AnalizadorLexico:
     def __init__(self, tipo, valor, linea):
         self.tipo = tipo
         self.valor = valor
@@ -23,7 +23,7 @@ class Lexer:
     t_NUMERO = r'\d+'
     t_OPERADOR = r'[+\-*/=]'
     t_CADENA = r'\"[^\"]*\"'
-    t_SIMBOLO_ESPECIAL = r'[(),:;{}[\]]'
+    t_SIMBOLO_ESPECIAL = r'[(),:;{}<>[\]]'
     t_COMENTARIO = r'\#.*'
 
     # Ignorar espacios
@@ -53,9 +53,12 @@ class Lexer:
 lexer = Lexer()
 lexer.analizar_archivo("codigo.txt")
 
-#Tokens encontrados
-for token in lexer.lexer:
-    token_obj = Token(token.type, token.value, token.lineno)
-    #print(f'Tipo: {token_obj.tipo}, Valor: {token_obj.valor}, Línea: {token_obj.linea}')
-    print(f'{token_obj.tipo}: {token_obj.valor}')
+analizador = lexer.lexer
 
+#Tokens encontrados
+def token_final():
+    for token in analizador:
+        token_obj = AnalizadorLexico(token.type, token.value, token.lineno)
+        #print(f'Tipo: {token_obj.tipo}, Valor: {token_obj.valor}, Línea: {token_obj.linea}')
+        print(f'{token_obj.tipo}: {token_obj.valor}')
+    return analizador
