@@ -1,0 +1,920 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    NEWLINE
+    OPERADOR
+    SIMBOLO_ESPECIAL
+
+Grammar
+
+Rule 0     S' -> expresion
+Rule 1     expresion -> expresion MAS expresion
+Rule 2     expresion -> expresion MENOS expresion
+Rule 3     expresion -> expresion POR expresion
+Rule 4     expresion -> expresion DIVIDIDO expresion
+Rule 5     expresion -> MENOS expresion
+Rule 6     expresion -> NUMERO
+Rule 7     expresion -> IDENTIFICADOR
+Rule 8     expresion -> CADENA
+Rule 9     expresion -> PALABRA_RESERVADA
+Rule 10    expresion -> ( expresion )
+Rule 11    instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion
+Rule 12    parametros -> IDENTIFICADOR
+Rule 13    parametros -> parametros , IDENTIFICADOR
+Rule 14    cuerpo_funcion -> instrucciones
+Rule 15    expresion -> IF expresion : cuerpo_condicional
+Rule 16    cuerpo_condicional -> instrucciones
+Rule 17    expresion -> IDENTIFICADOR ( argumentos )
+Rule 18    argumentos -> expresion
+Rule 19    argumentos -> argumentos , expresion
+Rule 20    comentario -> COMENTARIO
+Rule 21    comentario -> COMENTARIO_MULTILINEA
+Rule 22    instrucciones -> instruccion
+Rule 23    instrucciones -> comentario
+Rule 24    instrucciones -> instrucciones instruccion
+Rule 25    instrucciones -> instrucciones comentario
+
+Terminals, with rules where they appear
+
+(                    : 10 11 17
+)                    : 10 11 17
+,                    : 13 19
+:                    : 11 15
+CADENA               : 8
+COMENTARIO           : 20
+COMENTARIO_MULTILINEA : 21
+DEF                  : 11
+DIVIDIDO             : 4
+IDENTIFICADOR        : 7 11 12 13 17
+IF                   : 15
+MAS                  : 1
+MENOS                : 2 5
+NEWLINE              : 
+NUMERO               : 6
+OPERADOR             : 
+PALABRA_RESERVADA    : 9
+POR                  : 3
+SIMBOLO_ESPECIAL     : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+argumentos           : 17 19
+comentario           : 23 25
+cuerpo_condicional   : 15
+cuerpo_funcion       : 11
+expresion            : 1 1 2 2 3 3 4 4 5 10 15 18 19 0
+instruccion          : 22 24
+instrucciones        : 14 16 24 25
+parametros           : 11 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expresion
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    expresion                      shift and go to state 1
+
+state 1
+
+    (0) S' -> expresion .
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    MAS             shift and go to state 9
+    MENOS           shift and go to state 10
+    POR             shift and go to state 11
+    DIVIDIDO        shift and go to state 12
+
+
+state 2
+
+    (5) expresion -> MENOS . expresion
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    expresion                      shift and go to state 13
+
+state 3
+
+    (6) expresion -> NUMERO .
+
+    MAS             reduce using rule 6 (expresion -> NUMERO .)
+    MENOS           reduce using rule 6 (expresion -> NUMERO .)
+    POR             reduce using rule 6 (expresion -> NUMERO .)
+    DIVIDIDO        reduce using rule 6 (expresion -> NUMERO .)
+    $end            reduce using rule 6 (expresion -> NUMERO .)
+    )               reduce using rule 6 (expresion -> NUMERO .)
+    :               reduce using rule 6 (expresion -> NUMERO .)
+    ,               reduce using rule 6 (expresion -> NUMERO .)
+
+
+state 4
+
+    (7) expresion -> IDENTIFICADOR .
+    (17) expresion -> IDENTIFICADOR . ( argumentos )
+
+    MAS             reduce using rule 7 (expresion -> IDENTIFICADOR .)
+    MENOS           reduce using rule 7 (expresion -> IDENTIFICADOR .)
+    POR             reduce using rule 7 (expresion -> IDENTIFICADOR .)
+    DIVIDIDO        reduce using rule 7 (expresion -> IDENTIFICADOR .)
+    $end            reduce using rule 7 (expresion -> IDENTIFICADOR .)
+    )               reduce using rule 7 (expresion -> IDENTIFICADOR .)
+    :               reduce using rule 7 (expresion -> IDENTIFICADOR .)
+    ,               reduce using rule 7 (expresion -> IDENTIFICADOR .)
+    (               shift and go to state 14
+
+
+state 5
+
+    (8) expresion -> CADENA .
+
+    MAS             reduce using rule 8 (expresion -> CADENA .)
+    MENOS           reduce using rule 8 (expresion -> CADENA .)
+    POR             reduce using rule 8 (expresion -> CADENA .)
+    DIVIDIDO        reduce using rule 8 (expresion -> CADENA .)
+    $end            reduce using rule 8 (expresion -> CADENA .)
+    )               reduce using rule 8 (expresion -> CADENA .)
+    :               reduce using rule 8 (expresion -> CADENA .)
+    ,               reduce using rule 8 (expresion -> CADENA .)
+
+
+state 6
+
+    (9) expresion -> PALABRA_RESERVADA .
+
+    MAS             reduce using rule 9 (expresion -> PALABRA_RESERVADA .)
+    MENOS           reduce using rule 9 (expresion -> PALABRA_RESERVADA .)
+    POR             reduce using rule 9 (expresion -> PALABRA_RESERVADA .)
+    DIVIDIDO        reduce using rule 9 (expresion -> PALABRA_RESERVADA .)
+    $end            reduce using rule 9 (expresion -> PALABRA_RESERVADA .)
+    )               reduce using rule 9 (expresion -> PALABRA_RESERVADA .)
+    :               reduce using rule 9 (expresion -> PALABRA_RESERVADA .)
+    ,               reduce using rule 9 (expresion -> PALABRA_RESERVADA .)
+
+
+state 7
+
+    (10) expresion -> ( . expresion )
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    expresion                      shift and go to state 15
+
+state 8
+
+    (15) expresion -> IF . expresion : cuerpo_condicional
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    expresion                      shift and go to state 16
+
+state 9
+
+    (1) expresion -> expresion MAS . expresion
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    expresion                      shift and go to state 17
+
+state 10
+
+    (2) expresion -> expresion MENOS . expresion
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    expresion                      shift and go to state 18
+
+state 11
+
+    (3) expresion -> expresion POR . expresion
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    expresion                      shift and go to state 19
+
+state 12
+
+    (4) expresion -> expresion DIVIDIDO . expresion
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    expresion                      shift and go to state 20
+
+state 13
+
+    (5) expresion -> MENOS expresion .
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    MAS             reduce using rule 5 (expresion -> MENOS expresion .)
+    MENOS           reduce using rule 5 (expresion -> MENOS expresion .)
+    POR             reduce using rule 5 (expresion -> MENOS expresion .)
+    DIVIDIDO        reduce using rule 5 (expresion -> MENOS expresion .)
+    $end            reduce using rule 5 (expresion -> MENOS expresion .)
+    )               reduce using rule 5 (expresion -> MENOS expresion .)
+    :               reduce using rule 5 (expresion -> MENOS expresion .)
+    ,               reduce using rule 5 (expresion -> MENOS expresion .)
+
+  ! MAS             [ shift and go to state 9 ]
+  ! MENOS           [ shift and go to state 10 ]
+  ! POR             [ shift and go to state 11 ]
+  ! DIVIDIDO        [ shift and go to state 12 ]
+
+
+state 14
+
+    (17) expresion -> IDENTIFICADOR ( . argumentos )
+    (18) argumentos -> . expresion
+    (19) argumentos -> . argumentos , expresion
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    argumentos                     shift and go to state 21
+    expresion                      shift and go to state 22
+
+state 15
+
+    (10) expresion -> ( expresion . )
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    )               shift and go to state 23
+    MAS             shift and go to state 9
+    MENOS           shift and go to state 10
+    POR             shift and go to state 11
+    DIVIDIDO        shift and go to state 12
+
+
+state 16
+
+    (15) expresion -> IF expresion . : cuerpo_condicional
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    :               shift and go to state 24
+    MAS             shift and go to state 9
+    MENOS           shift and go to state 10
+    POR             shift and go to state 11
+    DIVIDIDO        shift and go to state 12
+
+
+state 17
+
+    (1) expresion -> expresion MAS expresion .
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    MAS             reduce using rule 1 (expresion -> expresion MAS expresion .)
+    MENOS           reduce using rule 1 (expresion -> expresion MAS expresion .)
+    $end            reduce using rule 1 (expresion -> expresion MAS expresion .)
+    )               reduce using rule 1 (expresion -> expresion MAS expresion .)
+    :               reduce using rule 1 (expresion -> expresion MAS expresion .)
+    ,               reduce using rule 1 (expresion -> expresion MAS expresion .)
+    POR             shift and go to state 11
+    DIVIDIDO        shift and go to state 12
+
+  ! POR             [ reduce using rule 1 (expresion -> expresion MAS expresion .) ]
+  ! DIVIDIDO        [ reduce using rule 1 (expresion -> expresion MAS expresion .) ]
+  ! MAS             [ shift and go to state 9 ]
+  ! MENOS           [ shift and go to state 10 ]
+
+
+state 18
+
+    (2) expresion -> expresion MENOS expresion .
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    MAS             reduce using rule 2 (expresion -> expresion MENOS expresion .)
+    MENOS           reduce using rule 2 (expresion -> expresion MENOS expresion .)
+    $end            reduce using rule 2 (expresion -> expresion MENOS expresion .)
+    )               reduce using rule 2 (expresion -> expresion MENOS expresion .)
+    :               reduce using rule 2 (expresion -> expresion MENOS expresion .)
+    ,               reduce using rule 2 (expresion -> expresion MENOS expresion .)
+    POR             shift and go to state 11
+    DIVIDIDO        shift and go to state 12
+
+  ! POR             [ reduce using rule 2 (expresion -> expresion MENOS expresion .) ]
+  ! DIVIDIDO        [ reduce using rule 2 (expresion -> expresion MENOS expresion .) ]
+  ! MAS             [ shift and go to state 9 ]
+  ! MENOS           [ shift and go to state 10 ]
+
+
+state 19
+
+    (3) expresion -> expresion POR expresion .
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    MAS             reduce using rule 3 (expresion -> expresion POR expresion .)
+    MENOS           reduce using rule 3 (expresion -> expresion POR expresion .)
+    POR             reduce using rule 3 (expresion -> expresion POR expresion .)
+    DIVIDIDO        reduce using rule 3 (expresion -> expresion POR expresion .)
+    $end            reduce using rule 3 (expresion -> expresion POR expresion .)
+    )               reduce using rule 3 (expresion -> expresion POR expresion .)
+    :               reduce using rule 3 (expresion -> expresion POR expresion .)
+    ,               reduce using rule 3 (expresion -> expresion POR expresion .)
+
+  ! MAS             [ shift and go to state 9 ]
+  ! MENOS           [ shift and go to state 10 ]
+  ! POR             [ shift and go to state 11 ]
+  ! DIVIDIDO        [ shift and go to state 12 ]
+
+
+state 20
+
+    (4) expresion -> expresion DIVIDIDO expresion .
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    MAS             reduce using rule 4 (expresion -> expresion DIVIDIDO expresion .)
+    MENOS           reduce using rule 4 (expresion -> expresion DIVIDIDO expresion .)
+    POR             reduce using rule 4 (expresion -> expresion DIVIDIDO expresion .)
+    DIVIDIDO        reduce using rule 4 (expresion -> expresion DIVIDIDO expresion .)
+    $end            reduce using rule 4 (expresion -> expresion DIVIDIDO expresion .)
+    )               reduce using rule 4 (expresion -> expresion DIVIDIDO expresion .)
+    :               reduce using rule 4 (expresion -> expresion DIVIDIDO expresion .)
+    ,               reduce using rule 4 (expresion -> expresion DIVIDIDO expresion .)
+
+  ! MAS             [ shift and go to state 9 ]
+  ! MENOS           [ shift and go to state 10 ]
+  ! POR             [ shift and go to state 11 ]
+  ! DIVIDIDO        [ shift and go to state 12 ]
+
+
+state 21
+
+    (17) expresion -> IDENTIFICADOR ( argumentos . )
+    (19) argumentos -> argumentos . , expresion
+
+    )               shift and go to state 25
+    ,               shift and go to state 26
+
+
+state 22
+
+    (18) argumentos -> expresion .
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    )               reduce using rule 18 (argumentos -> expresion .)
+    ,               reduce using rule 18 (argumentos -> expresion .)
+    MAS             shift and go to state 9
+    MENOS           shift and go to state 10
+    POR             shift and go to state 11
+    DIVIDIDO        shift and go to state 12
+
+
+state 23
+
+    (10) expresion -> ( expresion ) .
+
+    MAS             reduce using rule 10 (expresion -> ( expresion ) .)
+    MENOS           reduce using rule 10 (expresion -> ( expresion ) .)
+    POR             reduce using rule 10 (expresion -> ( expresion ) .)
+    DIVIDIDO        reduce using rule 10 (expresion -> ( expresion ) .)
+    $end            reduce using rule 10 (expresion -> ( expresion ) .)
+    )               reduce using rule 10 (expresion -> ( expresion ) .)
+    :               reduce using rule 10 (expresion -> ( expresion ) .)
+    ,               reduce using rule 10 (expresion -> ( expresion ) .)
+
+
+state 24
+
+    (15) expresion -> IF expresion : . cuerpo_condicional
+    (16) cuerpo_condicional -> . instrucciones
+    (22) instrucciones -> . instruccion
+    (23) instrucciones -> . comentario
+    (24) instrucciones -> . instrucciones instruccion
+    (25) instrucciones -> . instrucciones comentario
+    (11) instruccion -> . DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion
+    (20) comentario -> . COMENTARIO
+    (21) comentario -> . COMENTARIO_MULTILINEA
+
+    DEF             shift and go to state 31
+    COMENTARIO      shift and go to state 32
+    COMENTARIO_MULTILINEA shift and go to state 33
+
+    cuerpo_condicional             shift and go to state 27
+    instrucciones                  shift and go to state 28
+    instruccion                    shift and go to state 29
+    comentario                     shift and go to state 30
+
+state 25
+
+    (17) expresion -> IDENTIFICADOR ( argumentos ) .
+
+    MAS             reduce using rule 17 (expresion -> IDENTIFICADOR ( argumentos ) .)
+    MENOS           reduce using rule 17 (expresion -> IDENTIFICADOR ( argumentos ) .)
+    POR             reduce using rule 17 (expresion -> IDENTIFICADOR ( argumentos ) .)
+    DIVIDIDO        reduce using rule 17 (expresion -> IDENTIFICADOR ( argumentos ) .)
+    $end            reduce using rule 17 (expresion -> IDENTIFICADOR ( argumentos ) .)
+    )               reduce using rule 17 (expresion -> IDENTIFICADOR ( argumentos ) .)
+    :               reduce using rule 17 (expresion -> IDENTIFICADOR ( argumentos ) .)
+    ,               reduce using rule 17 (expresion -> IDENTIFICADOR ( argumentos ) .)
+
+
+state 26
+
+    (19) argumentos -> argumentos , . expresion
+    (1) expresion -> . expresion MAS expresion
+    (2) expresion -> . expresion MENOS expresion
+    (3) expresion -> . expresion POR expresion
+    (4) expresion -> . expresion DIVIDIDO expresion
+    (5) expresion -> . MENOS expresion
+    (6) expresion -> . NUMERO
+    (7) expresion -> . IDENTIFICADOR
+    (8) expresion -> . CADENA
+    (9) expresion -> . PALABRA_RESERVADA
+    (10) expresion -> . ( expresion )
+    (15) expresion -> . IF expresion : cuerpo_condicional
+    (17) expresion -> . IDENTIFICADOR ( argumentos )
+
+    MENOS           shift and go to state 2
+    NUMERO          shift and go to state 3
+    IDENTIFICADOR   shift and go to state 4
+    CADENA          shift and go to state 5
+    PALABRA_RESERVADA shift and go to state 6
+    (               shift and go to state 7
+    IF              shift and go to state 8
+
+    expresion                      shift and go to state 34
+
+state 27
+
+    (15) expresion -> IF expresion : cuerpo_condicional .
+
+    MAS             reduce using rule 15 (expresion -> IF expresion : cuerpo_condicional .)
+    MENOS           reduce using rule 15 (expresion -> IF expresion : cuerpo_condicional .)
+    POR             reduce using rule 15 (expresion -> IF expresion : cuerpo_condicional .)
+    DIVIDIDO        reduce using rule 15 (expresion -> IF expresion : cuerpo_condicional .)
+    $end            reduce using rule 15 (expresion -> IF expresion : cuerpo_condicional .)
+    )               reduce using rule 15 (expresion -> IF expresion : cuerpo_condicional .)
+    :               reduce using rule 15 (expresion -> IF expresion : cuerpo_condicional .)
+    ,               reduce using rule 15 (expresion -> IF expresion : cuerpo_condicional .)
+
+
+state 28
+
+    (16) cuerpo_condicional -> instrucciones .
+    (24) instrucciones -> instrucciones . instruccion
+    (25) instrucciones -> instrucciones . comentario
+    (11) instruccion -> . DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion
+    (20) comentario -> . COMENTARIO
+    (21) comentario -> . COMENTARIO_MULTILINEA
+
+    MAS             reduce using rule 16 (cuerpo_condicional -> instrucciones .)
+    MENOS           reduce using rule 16 (cuerpo_condicional -> instrucciones .)
+    POR             reduce using rule 16 (cuerpo_condicional -> instrucciones .)
+    DIVIDIDO        reduce using rule 16 (cuerpo_condicional -> instrucciones .)
+    $end            reduce using rule 16 (cuerpo_condicional -> instrucciones .)
+    )               reduce using rule 16 (cuerpo_condicional -> instrucciones .)
+    :               reduce using rule 16 (cuerpo_condicional -> instrucciones .)
+    ,               reduce using rule 16 (cuerpo_condicional -> instrucciones .)
+    DEF             shift and go to state 31
+    COMENTARIO      shift and go to state 32
+    COMENTARIO_MULTILINEA shift and go to state 33
+
+    instruccion                    shift and go to state 35
+    comentario                     shift and go to state 36
+
+state 29
+
+    (22) instrucciones -> instruccion .
+
+    DEF             reduce using rule 22 (instrucciones -> instruccion .)
+    COMENTARIO      reduce using rule 22 (instrucciones -> instruccion .)
+    COMENTARIO_MULTILINEA reduce using rule 22 (instrucciones -> instruccion .)
+    MAS             reduce using rule 22 (instrucciones -> instruccion .)
+    MENOS           reduce using rule 22 (instrucciones -> instruccion .)
+    POR             reduce using rule 22 (instrucciones -> instruccion .)
+    DIVIDIDO        reduce using rule 22 (instrucciones -> instruccion .)
+    $end            reduce using rule 22 (instrucciones -> instruccion .)
+    )               reduce using rule 22 (instrucciones -> instruccion .)
+    :               reduce using rule 22 (instrucciones -> instruccion .)
+    ,               reduce using rule 22 (instrucciones -> instruccion .)
+
+
+state 30
+
+    (23) instrucciones -> comentario .
+
+    DEF             reduce using rule 23 (instrucciones -> comentario .)
+    COMENTARIO      reduce using rule 23 (instrucciones -> comentario .)
+    COMENTARIO_MULTILINEA reduce using rule 23 (instrucciones -> comentario .)
+    MAS             reduce using rule 23 (instrucciones -> comentario .)
+    MENOS           reduce using rule 23 (instrucciones -> comentario .)
+    POR             reduce using rule 23 (instrucciones -> comentario .)
+    DIVIDIDO        reduce using rule 23 (instrucciones -> comentario .)
+    $end            reduce using rule 23 (instrucciones -> comentario .)
+    )               reduce using rule 23 (instrucciones -> comentario .)
+    :               reduce using rule 23 (instrucciones -> comentario .)
+    ,               reduce using rule 23 (instrucciones -> comentario .)
+
+
+state 31
+
+    (11) instruccion -> DEF . IDENTIFICADOR ( parametros ) : cuerpo_funcion
+
+    IDENTIFICADOR   shift and go to state 37
+
+
+state 32
+
+    (20) comentario -> COMENTARIO .
+
+    DEF             reduce using rule 20 (comentario -> COMENTARIO .)
+    COMENTARIO      reduce using rule 20 (comentario -> COMENTARIO .)
+    COMENTARIO_MULTILINEA reduce using rule 20 (comentario -> COMENTARIO .)
+    MAS             reduce using rule 20 (comentario -> COMENTARIO .)
+    MENOS           reduce using rule 20 (comentario -> COMENTARIO .)
+    POR             reduce using rule 20 (comentario -> COMENTARIO .)
+    DIVIDIDO        reduce using rule 20 (comentario -> COMENTARIO .)
+    $end            reduce using rule 20 (comentario -> COMENTARIO .)
+    )               reduce using rule 20 (comentario -> COMENTARIO .)
+    :               reduce using rule 20 (comentario -> COMENTARIO .)
+    ,               reduce using rule 20 (comentario -> COMENTARIO .)
+
+
+state 33
+
+    (21) comentario -> COMENTARIO_MULTILINEA .
+
+    DEF             reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    COMENTARIO      reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    COMENTARIO_MULTILINEA reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    MAS             reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    MENOS           reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    POR             reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    DIVIDIDO        reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    $end            reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    )               reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    :               reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+    ,               reduce using rule 21 (comentario -> COMENTARIO_MULTILINEA .)
+
+
+state 34
+
+    (19) argumentos -> argumentos , expresion .
+    (1) expresion -> expresion . MAS expresion
+    (2) expresion -> expresion . MENOS expresion
+    (3) expresion -> expresion . POR expresion
+    (4) expresion -> expresion . DIVIDIDO expresion
+
+    )               reduce using rule 19 (argumentos -> argumentos , expresion .)
+    ,               reduce using rule 19 (argumentos -> argumentos , expresion .)
+    MAS             shift and go to state 9
+    MENOS           shift and go to state 10
+    POR             shift and go to state 11
+    DIVIDIDO        shift and go to state 12
+
+
+state 35
+
+    (24) instrucciones -> instrucciones instruccion .
+
+    DEF             reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    COMENTARIO      reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    COMENTARIO_MULTILINEA reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    MAS             reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    MENOS           reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    POR             reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    DIVIDIDO        reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    $end            reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    )               reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    :               reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+    ,               reduce using rule 24 (instrucciones -> instrucciones instruccion .)
+
+
+state 36
+
+    (25) instrucciones -> instrucciones comentario .
+
+    DEF             reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    COMENTARIO      reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    COMENTARIO_MULTILINEA reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    MAS             reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    MENOS           reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    POR             reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    DIVIDIDO        reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    $end            reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    )               reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    :               reduce using rule 25 (instrucciones -> instrucciones comentario .)
+    ,               reduce using rule 25 (instrucciones -> instrucciones comentario .)
+
+
+state 37
+
+    (11) instruccion -> DEF IDENTIFICADOR . ( parametros ) : cuerpo_funcion
+
+    (               shift and go to state 38
+
+
+state 38
+
+    (11) instruccion -> DEF IDENTIFICADOR ( . parametros ) : cuerpo_funcion
+    (12) parametros -> . IDENTIFICADOR
+    (13) parametros -> . parametros , IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 39
+
+    parametros                     shift and go to state 40
+
+state 39
+
+    (12) parametros -> IDENTIFICADOR .
+
+    )               reduce using rule 12 (parametros -> IDENTIFICADOR .)
+    ,               reduce using rule 12 (parametros -> IDENTIFICADOR .)
+
+
+state 40
+
+    (11) instruccion -> DEF IDENTIFICADOR ( parametros . ) : cuerpo_funcion
+    (13) parametros -> parametros . , IDENTIFICADOR
+
+    )               shift and go to state 41
+    ,               shift and go to state 42
+
+
+state 41
+
+    (11) instruccion -> DEF IDENTIFICADOR ( parametros ) . : cuerpo_funcion
+
+    :               shift and go to state 43
+
+
+state 42
+
+    (13) parametros -> parametros , . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 44
+
+
+state 43
+
+    (11) instruccion -> DEF IDENTIFICADOR ( parametros ) : . cuerpo_funcion
+    (14) cuerpo_funcion -> . instrucciones
+    (22) instrucciones -> . instruccion
+    (23) instrucciones -> . comentario
+    (24) instrucciones -> . instrucciones instruccion
+    (25) instrucciones -> . instrucciones comentario
+    (11) instruccion -> . DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion
+    (20) comentario -> . COMENTARIO
+    (21) comentario -> . COMENTARIO_MULTILINEA
+
+    DEF             shift and go to state 31
+    COMENTARIO      shift and go to state 32
+    COMENTARIO_MULTILINEA shift and go to state 33
+
+    cuerpo_funcion                 shift and go to state 45
+    instrucciones                  shift and go to state 46
+    instruccion                    shift and go to state 29
+    comentario                     shift and go to state 30
+
+state 44
+
+    (13) parametros -> parametros , IDENTIFICADOR .
+
+    )               reduce using rule 13 (parametros -> parametros , IDENTIFICADOR .)
+    ,               reduce using rule 13 (parametros -> parametros , IDENTIFICADOR .)
+
+
+state 45
+
+    (11) instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .
+
+    DEF             reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    COMENTARIO      reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    COMENTARIO_MULTILINEA reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    MAS             reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    MENOS           reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    POR             reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    DIVIDIDO        reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    $end            reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    )               reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    :               reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+    ,               reduce using rule 11 (instruccion -> DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion .)
+
+
+state 46
+
+    (14) cuerpo_funcion -> instrucciones .
+    (24) instrucciones -> instrucciones . instruccion
+    (25) instrucciones -> instrucciones . comentario
+    (11) instruccion -> . DEF IDENTIFICADOR ( parametros ) : cuerpo_funcion
+    (20) comentario -> . COMENTARIO
+    (21) comentario -> . COMENTARIO_MULTILINEA
+
+  ! shift/reduce conflict for DEF resolved as shift
+  ! shift/reduce conflict for COMENTARIO resolved as shift
+  ! shift/reduce conflict for COMENTARIO_MULTILINEA resolved as shift
+    MAS             reduce using rule 14 (cuerpo_funcion -> instrucciones .)
+    MENOS           reduce using rule 14 (cuerpo_funcion -> instrucciones .)
+    POR             reduce using rule 14 (cuerpo_funcion -> instrucciones .)
+    DIVIDIDO        reduce using rule 14 (cuerpo_funcion -> instrucciones .)
+    $end            reduce using rule 14 (cuerpo_funcion -> instrucciones .)
+    )               reduce using rule 14 (cuerpo_funcion -> instrucciones .)
+    :               reduce using rule 14 (cuerpo_funcion -> instrucciones .)
+    ,               reduce using rule 14 (cuerpo_funcion -> instrucciones .)
+    DEF             shift and go to state 31
+    COMENTARIO      shift and go to state 32
+    COMENTARIO_MULTILINEA shift and go to state 33
+
+  ! DEF             [ reduce using rule 14 (cuerpo_funcion -> instrucciones .) ]
+  ! COMENTARIO      [ reduce using rule 14 (cuerpo_funcion -> instrucciones .) ]
+  ! COMENTARIO_MULTILINEA [ reduce using rule 14 (cuerpo_funcion -> instrucciones .) ]
+
+    instruccion                    shift and go to state 35
+    comentario                     shift and go to state 36
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for DEF in state 46 resolved as shift
+WARNING: shift/reduce conflict for COMENTARIO in state 46 resolved as shift
+WARNING: shift/reduce conflict for COMENTARIO_MULTILINEA in state 46 resolved as shift
